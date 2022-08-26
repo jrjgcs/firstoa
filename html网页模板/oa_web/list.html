@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>列表页面</title>
+		
+		<script type="text/javascript">
+			function del(){
+				if(window.confirm("删除了就不能恢复了")){
+					alert("删除中")
+				}
+			}
+		</script>
+		
+	</head>
+	<body>
+		<h1>列表页</h1>
+		<hr>
+		
+		<table border="1px">
+		<tr>
+			<th>编号</th>
+			<th>部门</th>
+			<th>地区</th>
+			<th>操作</th>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>业务部</td>
+			<td>北京</td>
+			<td>
+				<a href="javascript:void(0)" onclick="del()">删除</a>
+				<a href="update.html">修改</a>
+				<a href="detail.html">详情</a>
+			</td>
+		</tr>
+		</table>
+		<a href="add.html">新增数据</a>
+	</body>
+</html>
