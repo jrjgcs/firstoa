@@ -6,6 +6,31 @@ public class User {
     private String name = null;
     private String password = null;
 
+    public User(String name, String password, Address addr) {
+        this.name = name;
+        this.password = password;
+        this.addr = addr;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", addr=" + addr +
+                '}';
+    }
+
+    private Address addr = null;
+
+    public Address getAddr() {
+        return addr;
+    }
+
+    public void setAddr(Address addr) {
+        this.addr = addr;
+    }
+
     public String getName() {
         return name;
     }
@@ -20,14 +45,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 
     @Override
