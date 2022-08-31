@@ -75,10 +75,45 @@ public class UserLogin extends HttpServlet {
         } else {
             // 这里是要安全退出的
             HttpSession session = request.getSession(false);
-            session.invalidate();
+            if(session != null){
+                session.invalidate();
+            }
+
+            // 销毁cookie(退出系统,将所有的cookie全部销毁)
+    /*        Cookie[] cookies = request.getCookies();
+            if(cookies != null){
+                for (Cookie cookie : cookies) {
+                    String name = cookie.getName();
+                    if("username".equals(name) || "password".equals(name)){
+                        // 设置cookie有效期为0,表示删除该cookie
+                        cookie.setMaxAge(0);
+                        // 设置一下cookie的路径
+                        cookie.setPath("/");
+                        // 响应cookie给浏览器,浏览器会将之前的cookie覆盖
+                        response.addCookie(cookie);
+
+                    }
+                }
+            }*/
+            // 注意路径问题
+                Cookie cookie1 = new Cookie("username",null);
+                Cookie cookie2 = new Cookie("password",null);
+                cookie1.setPath(request.getContextPath());
+                cookie2.setPath(request.getContextPath());
+                cookie1.setMaxAge(0);
+                cookie2.setMaxAge(0);
+
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
+
+
+            // 跳转到登陆页面
             response.sendRedirect("/oa");
         }
     }
+
+    //  cookie:名字叫username,但是这个cookie关联的路径是 /oa 改这个会影响子目录
+    // cookie:名字也叫username,但是这个cookie关联的路径是 /oa/user 改这个可能就不能影响上面
 }
 
 

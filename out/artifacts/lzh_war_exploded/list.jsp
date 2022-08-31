@@ -1,5 +1,5 @@
-<%@ page import="com.lzh.bean.Dept" %>
-<%@ page import="java.util.List" %><%--
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
   Created by IntelliJ IDEA.
   User: haha
   Date: 2022/8/24
@@ -12,10 +12,12 @@
 <head>
   <meta charset="utf-8">
   <title>列表页面</title>
+  <base href="http://localhost:8080/oa/">
   <script type="text/javascript">
     function del(no){
       if(window.confirm("删除了就不能恢复了")){
-        document.location.href = "/oa/dept/del?no=" + no;
+        /*html的base标签可能对js代码不起作用，最好用EL表达式*/
+        document.location.href = "${pageContext.request.contextPath}/dept/del?no=" + no;
       }
     }
   </script>
@@ -23,9 +25,9 @@
 <body>
 <h1>列表页</h1>
 <hr>
+<h2>欢迎${username}</h2>
+[<a href="${pageContext.request.contextPath}/dept/out">安全退出</a>]
 
-<h2>欢迎<%=session.getAttribute("username")%></h2>
-[<a href="/oa/dept/out">安全退出</a>]
 <table border="1px">
   <tr>
     <th>编号</th>
@@ -33,27 +35,20 @@
     <th>地区</th>
     <th>操作</th>
   </tr>
-
-  <%
-    int i = 0;
-    List<Dept> lists = (List<Dept>)request.getAttribute("list");
-    for (Dept dept : lists) {
-  %>
-  <tr>
-    <td><%=(++i)%></td>
-    <td><%=dept.getNo()%></td>
-    <td><%=dept.getName()%></td>
-    <td><%=dept.getLoc()%></td>
-    <td>
-      <a href="javascript:void(0)" onclick="del(<%=dept.getNo()%>)">删除</a>
-      <a href="/oa/dept/update?no=<%=dept.getNo()%>">修改</a>
-      <a href="/oa/dept/detail?no=<%=dept.getNo()%>">详情</a>
-    </td>
-  </tr>
-<%
-  }
-%>
+  <c:forEach items="${list}" var="dept" varStatus="deptStatus">
+    <tr>
+      <td>${deptStatus.count}</td>
+      <td>${dept.no}</td>
+      <td>${dept.name}</td>
+      <td>${dept.loc}</td>
+      <td>
+        <a href="javascript:void(0)" onclick="del(${dept.no})">删除</a>
+        <a href="${pageContext.request.contextPath}/dept/update?no=${dept.no}">修改</a>
+        <a href="${pageContext.request.contextPath}/dept/detail?no=${dept.no}">详情</a>
+      </td>
+    </tr>
+  </c:forEach>
 </table>
-<a href="/oa/add.jsp">新增数据</a>
+<a href="add.jsp">新增数据</a>
 </body>
 </html>

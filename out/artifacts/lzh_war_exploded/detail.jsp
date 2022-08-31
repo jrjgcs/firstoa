@@ -13,14 +13,13 @@
   <title>详情页</title>
 </head>
 <body>
+<%--这个username是从session域中取的，因为他会从所有的域里面去找的，只有session域里面有--%>
+<h3>欢迎${username}</h3>
 <h1>详情页</h1>
 <hr>
-<%
-  Dept dept = (Dept) request.getAttribute("dept");
-%>
-部门编号:<%=dept.getNo()%> <br>
-部门名称:<%=dept.getName()%> <br>
-地区:<%=dept.getLoc()%> <br>
-<a href="/oa/dept/list">返回</a>
+部门编号:${dept.no}<br>
+部门名称:${dept.name}<br>
+地区:${dept.loc}<br>
+<input type="button" value="后退" onclick="window.history.back()">
 </body>
 </html>

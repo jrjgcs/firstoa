@@ -16,7 +16,7 @@
 <h1>登陆</h1>
 <hr>
 
-<form action="${pageContext.request.contextPath}/dept/login">
+<form action="/oa/dept/login">
   账号: <input type="text" name="user"> <br>
   密码: <input type="password" name="password"> <br>
   <input type="checkbox" value="1" name="f"> 十天免登录 <br>

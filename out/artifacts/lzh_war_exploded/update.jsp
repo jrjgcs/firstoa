@@ -1,4 +1,4 @@
-<%@ page import="com.lzh.bean.Dept" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: haha
   Date: 2022/8/24
@@ -18,12 +18,9 @@
 <form action="/oa/dept/modify" method="post">
   <h1>修改页</h1>
   <hr>
-  <%
-    Dept dept = (Dept)request.getAttribute("dept");
-  %>
-  部门编号:<input type="text" value="<%=dept.getNo()%>" name="no" readonly /> <br>
-  部门名称:<input type="text" value="<%=dept.getName()%>" name="name"/> <br>
-  部门地区:<input type="text" value="<%=dept.getLoc()%>" name="loc"/> <br>
+  部门编号:<input type="text" value="${dept.no}" name="no" readonly /> <br>
+  部门名称:<input type="text" value="${dept.name}" name="name"/> <br>
+  部门地区:<input type="text" value="${dept.name}" name="loc"/> <br>
   <input type="submit" value="修改">
 </form>
 </body>
